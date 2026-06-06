@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metodología BEM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         BLOQUE 2: METODOLOGÍA BEM (Bloque, Elemento, Modificador)
+         ============================================================
+         ¿Qué es BEM?
+         BEM = Block (Bloque), Element (Elemento), Modifier (Modificador).
+         Es una CONVENCION de cómo nombrar clases CSS.
+         
+         Analogía: Piensa en una TARJETA DE PERFIL como un objeto:
+         
+         BLOQUE (Block): El componente principal. Es independiente,
+         puede vivir solo. Ejemplo: "tarjeta" o "card".
+         
+         ELEMENTO (Element): Partes DENTRO del bloque. No tiene
+         sentido fuera del bloque. Se escribe con DOS guiones bajos.
+         Ejemplo: tarjeta__titulo, tarjeta__imagen.
+         
+         MODIFICADOR (Modifier): Una VARIANTE del bloque o elemento.
+         Cambia apariencia o comportamiento. Se escribe con DOS guiones.
+         Ejemplo: tarjeta--destacada, tarjeta__boton--grande.
+         
+         Sintaxis completa:
+         .bloque                    → El componente principal
+         .bloque__elemento          → Una parte dentro del bloque
+         .bloque--modificador       → Una variante del bloque
+         .bloque__elemento--modif   → Una variante de un elemento
+         ============================================================ -->
+
+
+    <!-- <main> centra el contenido de la página. En este ejercicio nos enfocamos en los componentes BEM dentro del main. -->
+    <main>
+
+        <h1>Metodología BEM: Tarjetas de Perfil</h1>
+
+        <!-- ============================================================
+             BLOQUE: "perfil"
+             Este es nuestro componente principal (Block).
+             Todo lo que empieza con "perfil" pertenece a este bloque.
+             ============================================================ -->
+
+        <!-- TARJETA 1: Tarjeta de perfil NORMAL (sin modificadores) -->
+        <!-- La clase "perfil" es el BLOQUE. Es el contenedor principal. No necesita guiones porque es el nombre base. -->
+        <article class="perfil">
+
+            <!-- "perfil__imagen" es un ELEMENTO. Los dos guiones bajos (__) indican que pertenece al bloque "perfil". Es como decir "la imagen DE perfil". -->
+            <img class="perfil__imagen" src="https://placehold.co/150x150/3b82f6/white?text=Ana">
+
+            <!-- "perfil__nombre" = elemento "nombre" del bloque "perfil". "perfil__profesion" = elemento "profesion" del bloque "perfil". Cada pieza del componente tiene su clase BEM. -->
+            <h2 class="perfil__nombre">Liz Balaustrén</h2>
+            <p class="perfil__profesion">Desarrolladora Frontend</p>
+            <p class="perfil__descripcion">Apasionada por crear interfaces bonitas y accesibles.</p>
+
+            <!-- "perfil__boton" es otro elemento del bloque. Un bloque puede tener muchos elementos. Cada uno representa una pieza distinta del componente. -->
+            <button class="perfil__boton">Seguir</button>
+        </article>
+
+
+        <!-- TARJETA 2: Tarjeta de perfil DESTACADA (con modificador de bloque) -->
+        <!-- "perfil perfil--destacada" tiene DOS clases. "perfil" es el bloque base. "perfil--destacada" es un MODIFICADOR (los dos guiones --). Esto significa "una versión especial del bloque perfil". El modificador NO reemplaza al bloque, lo COMPLEMENTA. Siempre se usan juntos. -->
+        <article class="perfil perfil--destacada">
+
+            <!-- Los elementos NO necesitan el modificador en su clase. Siguen siendo "perfil__imagen", no "perfil--destacada__imagen". El modificador ya se aplica al bloque padre, y CSS se encarga del resto usando selectores descendientes. -->
+            <img class="perfil__imagen" src="https://placehold.co/150x150/f59e0b/white?text=Pablo">
+
+            <h2 class="perfil__nombre">Pablo Aguilera</h2>
+            <p class="perfil__profesion">Diseñador UX/UI</p>
+            <p class="perfil__descripcion">Creando experiencias digitales desde 2015.</p>
+
+            <!-- "perfil__boton perfil__boton--primario" = el elemento "boton" CON un modificador propio. Observa que el modificador se aplica al ELEMENTO, no al bloque. "--primario" indica que es la versión principal/importante del botón. -->
+            <button class="perfil__boton perfil__boton--primario">Seguir</button>
+        </article>
+
+
+        <!-- TARJETA 3: Tarjeta de perfil con botón GRANDE (modificador de elemento) -->
+        <article class="perfil">
+            <img class="perfil__imagen" src="https://placehold.co/150x150/10b981/white?text=Javiera">
+            <h2 class="perfil__nombre">Javiera Ramirez</h2>
+            <p class="perfil__profesion">Full Stack Developer</p>
+            <p class="perfil__descripcion">JavaScript, Python y todo lo que pille.</p>
+
+            <!-- "perfil__boton perfil__boton--grande" = el botón normal MÁS la variante "grande". El modificador "--grande" solo afecta al tamaño del botón. Podríamos combinar modificadores si quisiéramos: "perfil__boton perfil__boton--primario perfil__boton--grande" -->
+            <button class="perfil__boton perfil__boton--grande">Seguir</button>
+        </article>
+
+    </main>
+
+</body>
+</html>

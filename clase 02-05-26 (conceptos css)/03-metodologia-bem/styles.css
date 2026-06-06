@@ -1,0 +1,155 @@
+/* ============================================================
+   BLOQUE 2: CSS CON METODOLOGÍA BEM
+   ============================================================
+   Reglas de oro de BEM en CSS:
+   
+   1. NUNCA anides selectores de BEM. No hagas .perfil .perfil__nombre.
+      Cada clase debe ser INDEPENDIENTE. La especificidad siempre es 1 clase.
+   
+   2. El bloque se puede usar solo: .perfil
+      El elemento SIEMPRE necesita el bloque: .perfil__nombre
+      El modificador SIEMPRE necesita el bloque o elemento: .perfil--destacada
+   
+   3. Ventaja principal: puedes buscar ".perfil__boton" en tu proyecto
+      y encuentras EXACTAMENTE ese componente. No hay conflictos.
+   ============================================================ */
+
+
+/* ==================== RESET BÁSICO ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    /* background-color: fondo gris claro para toda la página. */
+    background-color: #f1f5f9;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+/* ==================== BLOQUE: perfil ==================== */
+/* Este es el BLOQUE principal. La clase .perfil define la tarjeta completa. En BEM, el bloque es independiente y reutilizable. Podrías copiar y pegar este HTML en cualquier página y funcionaría. */
+.perfil {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    /* margin-bottom: espacio entre tarjetas. */
+    margin-bottom: 2rem;
+    /* text-align: center centra todo el contenido de la tarjeta. */
+    text-align: center;
+    /* box-shadow: crea una sombra suave debajo de la tarjeta.
+       0 = desplazamiento horizontal (no se mueve a los lados)
+       4px = desplazamiento vertical (4px hacia abajo)
+       6px = difuminado (qué tan borrosa es la sombra)
+       rgba(0,0,0,0.1) = color negro al 10% de opacidad */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ==================== ELEMENTO: perfil__imagen ==================== */
+/* .perfil__imagen es un ELEMENTO. Pertenece al bloque "perfil". En BEM, el nombre completo incluye el bloque. Los dos guiones bajos (__) son el conector bloque-elemento. */
+.perfil__imagen {
+    width: 120px;
+    height: 120px;
+    /* border-radius: 50% convierte un cuadrado en un CÍRCULO perfecto. 50% es la mitad del ancho/alto. */
+    border-radius: 50%;
+    /* object-fit: cover es como "background-size: cover" pero para <img>. Recorta la imagen para que llene el espacio sin deformarse. */
+    object-fit: cover;
+    /* margin-bottom: espacio debajo de la imagen. */
+    margin-bottom: 1rem;
+    /* border: borde de 3px alrededor de la foto de perfil. */
+    border: 3px solid #e2e8f0;
+}
+
+
+/* ==================== ELEMENTO: perfil__nombre ==================== */
+.perfil__nombre {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+}
+
+
+/* ==================== ELEMENTO: perfil__profesion ==================== */
+.perfil__profesion {
+    /* font-weight: semibold = negrita media. Valores: normal, bold, y números del 100 al 900. */
+    font-weight: 600;
+    color: #3b82f6;
+    margin-bottom: 0.5rem;
+}
+
+
+/* ==================== ELEMENTO: perfil__descripcion ==================== */
+.perfil__descripcion {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+
+/* ==================== ELEMENTO: perfil__boton ==================== */
+.perfil__boton {
+    background-color: #e2e8f0;
+    color: #334155;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.perfil__boton:hover {
+    background-color: #cbd5e1;
+}
+
+
+/* ==================== MODIFICADOR: perfil--destacada ==================== */
+/* .perfil--destacada es un MODIFICADOR DEL BLOQUE. Los dos guiones (--) conectan bloque-modificador. Este modificador cambia la apariencia de TODA la tarjeta. Se usa SIEMPRE junto con .perfil: class="perfil perfil--destacada" */
+.perfil--destacada {
+    /* border: borde dorado de 3px para destacar esta tarjeta. */
+    border: 3px solid #f59e0b;
+    /* background-color: fondo ligeramente amarillo para diferenciarla. */
+    background-color: #fffbeb;
+}
+
+/* .perfil--destacada .perfil__nombre usa un selector descendiente. Significa: "el elemento perfil__nombre que esté DENTRO de una perfil--destacada". Así el modificador del bloque afecta a los elementos internos SIN necesidad de crear modificadores para cada elemento. */
+.perfil--destacada .perfil__nombre {
+    color: #d97706;
+}
+
+
+/* ==================== MODIFICADOR: perfil__boton--primario ==================== */
+/* .perfil__boton--primario es un MODIFICADOR DEL ELEMENTO. Cambia la apariencia del botón específicamente. Los dos guiones (--) van entre el elemento y el modificador. */
+.perfil__boton--primario {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.perfil__boton--primario:hover {
+    background-color: #2563eb;
+}
+
+
+/* ==================== MODIFICADOR: perfil__boton--grande ==================== */
+.perfil__boton--grande {
+    /* font-size: texto más grande. */
+    font-size: 1.125rem;
+    /* padding: más espacio interior = botón más grande. */
+    padding: 1rem 3rem;
+    font-weight: bold;
+}

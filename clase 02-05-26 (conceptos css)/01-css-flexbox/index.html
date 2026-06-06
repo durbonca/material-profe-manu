@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox - Clase estudiantes USACH</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         BLOQUE 3: CSS FLEXBOX
+         ============================================================
+         ¿Qué es Flexbox?
+         Flexbox = Flexible Box Layout (Distribución de Caja Flexible).
+         
+         Analogía: Flexbox es como organizar libros en una estantería.
+         Puedes ponerlos en FILA (uno al lado del otro) o en COLUMNA
+         (uno encima del otro). Y puedes decidir si los alineas a la
+         izquierda, al centro, a la derecha, o los repartes
+         uniformemente.
+         
+         Conceptos clave:
+         - CONTENEDOR FLEX (padre): El elemento con display: flex
+         - ITEMS FLEX (hijos): Los elementos DIRECTAMENTE dentro
+         
+         El contenedor controla a los hijos. Los hijos obedecen.
+         ============================================================ -->
+
+
+    <main>
+        <h1>CSS Flexbox - Galería Interactiva</h1>
+
+
+        <!-- ==================== EJEMPLO 1: flex-direction ==================== -->
+        <section>
+            <h2>1. flex-direction: ¿Fila o Columna?</h2>
+            <p>Controla la dirección en la que se colocan los elementos.</p>
+
+            <!-- display: flex convierte este div en un CONTENEDOR FLEX. Todos sus hijos DIRECTOS (.caja) se convierten en ITEMS FLEX. Por defecto, se ponen en FILA horizontal. -->
+
+            <!-- Ejemplo en FILA (row) -->
+            <h3>direction: row (fila) → por defecto</h3>
+            <div class="contenedor contenedor--fila">
+                <!-- Estos 3 divs son los ITEMS FLEX. Son hijos directos del contenedor con display: flex. Cada uno tiene la clase "caja" que les da estilo visual. -->
+                <div class="caja">1</div>
+                <div class="caja">2</div>
+                <div class="caja">3</div>
+            </div>
+
+            <!-- Ejemplo en COLUMNA (column) -->
+            <h3>direction: column (columna) → uno encima de otro</h3>
+            <div class="contenedor contenedor--columna">
+                <div class="caja">1</div>
+                <div class="caja">2</div>
+                <div class="caja">3</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 2: justify-content ==================== -->
+        <section>
+            <h2>2. justify-content: ¿Cómo repartimos en el eje principal?</h2>
+            <p>Controla la distribución de los elementos a lo largo del eje principal (horizontal si es row).</p>
+
+            <h3>flex-start → al inicio (por defecto)</h3>
+            <div class="contenedor contenedor--inicio">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+
+            <h3>center → centrados</h3>
+            <div class="contenedor contenedor--centro">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+
+            <h3>flex-end → al final</h3>
+            <div class="contenedor contenedor--final">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+
+            <h3>space-between → espacio igual ENTRE ellos (pegados a los bordes)</h3>
+            <div class="contenedor contenedor--entre">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+
+            <h3>space-around → espacio igual ALREDEDOR de cada uno</h3>
+            <div class="contenedor contenedor--alrededor">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+
+            <h3>space-evenly → espacio IGUAL en todo (incluyendo bordes)</h3>
+            <div class="contenedor contenedor--uniforme">
+                <div class="caja">A</div>
+                <div class="caja">B</div>
+                <div class="caja">C</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 3: align-items ==================== -->
+        <section>
+            <h2>3. align-items: ¿Cómo alineamos en el eje cruzado?</h2>
+            <p>Controla la alineación en el eje PERPENDICULAR (vertical si es row). Los items tienen alturas diferentes para ver el efecto.</p>
+
+            <h3>flex-start → arriba</h3>
+            <div class="contenedor contenedor--altura contenedor--arriba">
+                <!-- Estas cajas tienen alturas diferentes (clases caja--pequeña, caja--mediana, caja--grande) para que se note cómo align-items las posiciona verticalmente. -->
+                <div class="caja caja--pequena">Peq</div>
+                <div class="caja caja--mediana">Med</div>
+                <div class="caja caja--grande">Gra</div>
+            </div>
+
+            <h3>center → centrados verticalmente</h3>
+            <div class="contenedor contenedor--altura contenedor--centrado-v">
+                <div class="caja caja--pequena">Peq</div>
+                <div class="caja caja--mediana">Med</div>
+                <div class="caja caja--grande">Gra</div>
+            </div>
+
+            <h3>stretch → estirados (por defecto, ocupan toda la altura)</h3>
+            <div class="contenedor contenedor--altura contenedor--estirados">
+                <div class="caja caja--pequena">Peq</div>
+                <div class="caja caja--mediana">Med</div>
+                <div class="caja caja--grande">Gra</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 4: gap + flex-wrap ==================== -->
+        <section>
+            <h2>4. gap y flex-wrap: Espacio entre elementos y salto de línea</h2>
+
+            <h3>gap: espacio entre elementos (sin márgenes)</h3>
+            <div class="contenedor contenedor--gap">
+                <div class="caja">1</div>
+                <div class="caja">2</div>
+                <div class="caja">3</div>
+                <div class="caja">4</div>
+            </div>
+
+            <h3>flex-wrap: cuando no caben, ¿saltan de línea?</h3>
+            <p>Redimensiona la ventana para ver cómo las cajas bajan a otra línea.</p>
+            <!-- flex-wrap: wrap permite que los items que no caben en una fila "salten" a la siguiente línea. Sin esto, se aplastarían o se saldrían del contenedor. -->
+            <div class="contenedor contenedor--wrap">
+                <div class="caja">1</div>
+                <div class="caja">2</div>
+                <div class="caja">3</div>
+                <div class="caja">4</div>
+                <div class="caja">5</div>
+                <div class="caja">6</div>
+                <div class="caja">7</div>
+                <div class="caja">8</div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

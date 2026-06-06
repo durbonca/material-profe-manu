@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid - Layout de Revista</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         BLOQUE 4: CSS GRID
+         ============================================================
+         ¿Qué es CSS Grid?
+         Grid = Cuadrícula bidimensional.
+         
+         Analogía: Si Flexbox es organizar libros en una estantería
+         (una dimensión: fila O columna), Grid es como el plano de
+         un edificio con filas Y columnas simultáneamente.
+         Puedes colocar elementos en CELDAS específicas, como en
+         una tabla de Excel o un tablero de ajedrez.
+         
+         Flexbox = 1 dimensión (fila O columna)
+         Grid = 2 dimensiones (filas Y columnas a la vez)
+         
+         Conceptos clave:
+         - CONTENEDOR GRID: display: grid
+         - COLUMNAS: grid-template-columns
+         - FILAS: grid-template-rows
+         - GAP: espacio entre celdas
+         - POSICIONAMIENTO: grid-column, grid-row
+         - fr: una fracción del espacio disponible
+         ============================================================ -->
+
+
+    <main>
+        <h1>CSS Grid - Layout tipo Revista</h1>
+
+
+        <!-- ==================== EJEMPLO 1: Grid Básico ==================== -->
+        <section>
+            <h2>1. Grid básico: columnas con fr</h2>
+            <p>Creamos una cuadrícula de 3 columnas iguales usando <code>1fr 1fr 1fr</code> (o su atajo <code>repeat(3, 1fr)</code>).</p>
+
+            <!-- Este contenedor tiene display: grid y grid-template-columns: repeat(3, 1fr). Esto crea 3 columnas de igual tamaño. "fr" = fracción del espacio disponible. 1fr + 1fr + 1fr = 3 partes iguales. -->
+            <div class="grid-basico">
+                <!-- Estos divs son los ITEMS GRID. Se colocan automáticamente en las celdas de la cuadrícula, de izquierda a derecha y de arriba abajo. No necesitas decirles dónde ir (a menos que quieras posicionarlos manualmente). -->
+                <div class="celda">1</div>
+                <div class="celda">2</div>
+                <div class="celda">3</div>
+                <div class="celda">4</div>
+                <div class="celda">5</div>
+                <div class="celda">6</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 2: Columnas de distintos tamaños ==================== -->
+        <section>
+            <h2>2. Columnas de distintos tamaños</h2>
+            <p>Las columnas pueden tener tamaños diferentes: <code>2fr 1fr 1fr</code> (la primera es el doble de grande).</p>
+
+            <div class="grid-desigual">
+                <div class="celda">1 (2fr)</div>
+                <div class="celda">2 (1fr)</div>
+                <div class="celda">3 (1fr)</div>
+                <div class="celda">4 (2fr)</div>
+                <div class="celda">5 (1fr)</div>
+                <div class="celda">6 (1fr)</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 3: Filas y gap ==================== -->
+        <section>
+            <h2>3. Filas (rows) y gap (espaciado)</h2>
+            <p>Podemos definir también la altura de las filas con <code>grid-template-rows</code> y el espacio entre celdas con <code>gap</code>.</p>
+
+            <div class="grid-con-rows">
+                <div class="celda">Fila 1 (100px)</div>
+                <div class="celda">Fila 1 (100px)</div>
+                <div class="celda">Fila 1 (100px)</div>
+                <div class="celda">Fila 2 (auto)</div>
+                <div class="celda">Fila 2 (auto)</div>
+                <div class="celda">Fila 2 (auto)</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 4: Posicionar elementos ==================== -->
+        <section>
+            <h2>4. Posicionar elementos con grid-column y grid-row</h2>
+            <p>Podemos decirle a un elemento exactamente en qué celdas colocarse, e incluso hacer que ocupe VARIAS celdas.</p>
+
+            <!-- Este es un grid de 3 columnas x 3 filas. Algunos elementos se expanden para ocupar varias celdas usando grid-column y grid-row. Es como fusionar celdas en Excel. -->
+            <div class="grid-layout">
+                <!-- .cabecera tiene grid-column: 1 / -1. El "-1" significa "la última línea del grid". Así ocupa TODAS las columnas, de la primera a la última. Es un truco muy usado para headers. -->
+                <div class="celda celda--cabecera">Cabecera (ocupa todas las columnas)</div>
+
+                <!-- .sidebar tiene grid-column: 1 / 2. Va de la línea 1 a la línea 2 = solo la PRIMERA columna. Y grid-row: 2 / 4 = va de la línea de fila 2 a la 4 = ocupa DOS filas. -->
+                <div class="celda celda--sidebar">Barra lateral</div>
+
+                <div class="celda celda--principal">
+                    <h3>Contenido Principal</h3>
+                    <p>Este elemento ocupa la columna central y la derecha, y se extiende por dos filas.</p>
+                    <p>Grid nos permite crear layouts complejos con muy poco código.</p>
+                </div>
+
+                <div class="celda celda--widget">Widget 1</div>
+                <div class="celda celda--widget">Widget 2</div>
+
+                <!-- .pie tiene grid-column: 1 / -1 otra vez (todas las columnas). Es el footer, ocupa todo el ancho. -->
+                <div class="celda celda--pie">Pie de página (ocupa todas las columnas)</div>
+            </div>
+        </section>
+
+
+        <!-- ==================== EJEMPLO 5: minmax() y auto-fit ==================== -->
+        <section>
+            <h2>5. Grid responsivo automático con minmax() y auto-fit</h2>
+            <p>Redimensiona la ventana. Las columnas se adaptan SOLAS sin media queries.</p>
+
+            <!-- grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) es la línea MÁGICA de Grid. Significa: "crea tantas columnas como quepan (auto-fit), cada una de al menos 200px (min) y como máximo 1fr (max)". Es responsivo sin necesidad de @media queries. -->
+            <div class="grid-responsivo">
+                <div class="celda">Tarjeta 1</div>
+                <div class="celda">Tarjeta 2</div>
+                <div class="celda">Tarjeta 3</div>
+                <div class="celda">Tarjeta 4</div>
+                <div class="celda">Tarjeta 5</div>
+                <div class="celda">Tarjeta 6</div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

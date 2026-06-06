@@ -1,0 +1,209 @@
+/* ============================================================
+   BLOQUE 4: CSS GRID - LAYOUT DE REVISTA
+   ============================================================
+   Grid en resumen:
+   
+   Se aplica al CONTENEDOR con: display: grid
+   
+   Propiedades del CONTENEDOR:
+   - grid-template-columns: define columnas y su tamaño
+   - grid-template-rows: define filas y su altura
+   - gap: espacio entre celdas
+   
+   Propiedades de los ITEMS (hijos):
+   - grid-column: en qué columna(s) se coloca
+   - grid-row: en qué fila(s) se coloca
+   
+   Unidades útiles:
+   - fr = fracción del espacio disponible
+   - auto = se adapta al contenido
+   - px, %, rem = unidades normales
+   - minmax(min, max) = tamaño entre un mínimo y un máximo
+   
+   Analogía: Grid es como un tablero de ajedrez. Tú defines
+   cuántas casillas hay (columnas y filas), y luego decides
+   en qué casilla va cada pieza. Algunas piezas pueden ocupar
+   varias casillas a la vez.
+   ============================================================ */
+
+
+/* ==================== RESET BÁSICO ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+h2 {
+    color: #1e293b;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+section > p {
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+/*  code { } da estilo a las etiquetas <code> del HTML (texto inline que muestra código). Le ponemos fondo gris claro y tipografía monoespaciada para que parezca código. */
+code {
+    background-color: #e2e8f0;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+
+/* ==================== CELDA BASE ==================== */
+/*  .celda es la clase para TODOS los bloques de colores de los ejercicios de Grid. Son los ITEMS GRID que se colocan dentro de los contenedores grid. */
+.celda {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    /* min-height: cada celda tiene al menos esta altura. */
+    min-height: 80px;
+}
+
+
+/* ====================  1: Grid Básico ==================== */
+/*  display: grid activa CSS Grid en este contenedor. Los hijos directos (.celda) se convierten en "grid items" y se colocan automáticamente en la cuadrícula. */
+.grid-basico {
+    display: grid;
+
+    /*  grid-template-columns: repeat(3, 1fr) crea 3 columnas de igual tamaño. "repeat(3, 1fr)" es equivalente a escribir "1fr 1fr 1fr". repeat() es un atajo para no repetir valores manualmente. */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* gap: espacio entre celdas (tanto horizontal como vertical). */
+    gap: 1rem;
+}
+
+
+/* ====================  2: Columnas desiguales ==================== */
+.grid-desigual {
+    display: grid;
+
+    /*  grid-template-columns: 2fr 1fr 1fr crea 3 columnas donde la PRIMERA es el DOBLE de ancha que las otras dos. 2fr + 1fr + 1fr = 4 partes totales. La primera ocupa 2/4 = 50%. Las otras dos ocupan 1/4 = 25% cada una. */
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 1rem;
+}
+
+
+/* ====================  3: Filas y gap ==================== */
+.grid-con-rows {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    /*  grid-template-rows define la ALTURA de cada fila. "100px auto" significa: primera fila = 100px fijos, segunda fila = automática (se adapta al contenido). Como tenemos 6 items en 3 columnas = 2 filas. */
+    grid-template-rows: 100px auto;
+
+    /*  gap se puede separar en dos valores: gap (vertical) horizontal. El primero es el espacio entre filas, el segundo entre columnas. */
+    gap: 1rem 1.5rem;
+}
+
+
+/* ====================  4: Layout tipo revista ==================== */
+.grid-layout {
+    display: grid;
+    /*  Grid de 3 columnas. Pero atención: los items NO se colocan automáticamente. Usamos grid-column y grid-row en cada item para decirles EXACTAMENTE dónde van. */
+    grid-template-columns: 1fr 2fr 1fr;
+    /* 3 filas de alturas diferentes. */
+    grid-template-rows: auto 200px auto;
+    gap: 1rem;
+}
+
+/*  grid-column: 1 / -1 significa "desde la línea de columna 1 hasta la última línea (-1)". -1 siempre se refiere a la última línea del grid. Esto hace que la cabecera ocupe TODO el ancho. */
+.celda--cabecera {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+/*  grid-column: 1 / 2 = de la línea 1 a la línea 2 = solo la primera columna. grid-row: 2 / 4 = de la línea de fila 2 a la 4 = ocupa las filas 2 y 3 (dos filas). Las líneas del grid son INVISIBLES pero existen: en un grid de 3 columnas hay 4 líneas verticales (0, 1, 2, 3). */
+.celda--sidebar {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+    background: linear-gradient(135deg, #059669, #10b981);
+    /* flex-direction: column apila el contenido verticalmente dentro de la celda. */
+    flex-direction: column;
+}
+
+/*  grid-column: 2 / 4 = de la línea 2 a la 4 = columnas 2 y 3 (dos columnas). grid-row: 2 / 3 = solo la fila 2. Este es el contenido PRINCIPAL, más ancho que el sidebar. */
+.celda--principal {
+    grid-column: 2 / 4;
+    grid-row: 2 / 3;
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    /* justify-content: flex-start alinea el contenido a la izquierda (no centrado como las demás celdas). align-items: flex-start alinea arriba. */
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.celda--widget {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+.celda--pie {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+
+/* ====================  5: Grid responsivo automático ==================== */
+.grid-responsivo {
+    display: grid;
+    gap: 1rem;
+
+    /*  Esta es la LÍNEA MÁGICA de Grid:
+    
+       repeat(auto-fit, minmax(200px, 1fr))
+       
+       Desglose:
+       - auto-fit = "crea tantas columnas como quepan en el espacio disponible"
+       - minmax(200px, 1fr) = "cada columna mide como mínimo 200px y como máximo 1fr (todo lo que pueda)"
+       
+       Resultado: en pantallas grandes tendrás 4 columnas. En tablets, 3 o 2.
+       En móviles, 1 columna. ¡TODO sin media queries!
+       
+       Es la forma más elegante de hacer layouts responsivos.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.grid-responsivo .celda {
+    background: linear-gradient(135deg, #14b8a6, #3b82f6);
+    min-height: 120px;
+}

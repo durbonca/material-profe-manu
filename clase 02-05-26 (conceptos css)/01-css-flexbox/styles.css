@@ -1,0 +1,246 @@
+/* ============================================================
+   BLOQUE 3: CSS FLEXBOX - GALERÍA INTERACTIVA
+   ============================================================
+   Flexbox en resumen:
+   
+   Se aplica al CONTENEDOR (padre) con: display: flex
+   
+   Propiedades del CONTENEDOR:
+   - flex-direction: row | column → ¿fila o columna?
+   - justify-content: ¿cómo reparto en el eje principal?
+   - align-items: ¿cómo alineo en el eje cruzado?
+   - gap: espacio entre elementos
+   - flex-wrap: nowrap | wrap → ¿pueden saltar de línea?
+   
+   Analogía final: Flexbox es como un organizador de cajones.
+   Tú decides si las cosas van en fila o en columna, si las
+   juntas al principio, las centras, o las repartes. Y si
+   no caben, decides si las aplastas o las pasas al siguiente
+   cajón (fila).
+   ============================================================ */
+
+
+/* ==================== RESET BÁSICO ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+
+h2 {
+    color: #1e293b;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #475569;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+section > p {
+    color: #64748b;
+    margin-bottom: 1rem;
+}
+
+/* ==================== CAJAS DE COLORES ==================== */
+/* .caja es la clase base para todos los cuadrados de colores. 
+Son los ITEMS FLEX que vamos a organizar con Flexbox. */
+.caja {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    /* width: ancho fijo de cada caja. */
+    width: 80px;
+    /* height: alto por defecto. */
+    height: 80px;
+    /* display: flex EN la caja misma para centrar el número dentro de ella. 
+    Sí, un item flex PUEDE ser también un contenedor flex. */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+
+/* ==================== MODIFICADORES DE ALTURA ==================== */
+/* Estas clases cambian la altura de las cajas para demostrar cómo 
+align-items posiciona elementos de diferentes tamaños. */
+.caja--pequena {
+    height: 50px;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+}
+
+.caja--mediana {
+    height: 80px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.caja--grande {
+    height: 120px;
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+}
+
+
+/* ==================== CONTENEDOR FLEX BASE ==================== */
+/* .contenedor es la clase base del CONTENEDOR FLEX. Aquí es donde 
+ocurre la magia. display: flex activa Flexbox y todos los hijos 
+directos se comportan como items flex. */
+.contenedor {
+    /* display: flex → ¡ACTIVA FLEXBOX! Esto convierte todos los 
+    hijos directos en "flex items". Se colocan en fila horizontal 
+    por defecto. */
+    display: flex;
+    background-color: #ffffff;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    /* min-height: altura mínima del contenedor. Si los hijos son 
+    más altos, crece. Si son más pequeños, mantiene esta altura. */
+    min-height: 120px;
+}
+
+/* flex-direction: row es el VALOR POR DEFECTO. Los items se ponen 
+en FILA horizontal (de izquierda a derecha). Es como una línea de personas.
+No hace falta escribirlo, pero lo ponemos para que quede claro. */
+.contenedor--fila {
+    flex-direction: row;
+}
+
+/* flex-direction: column pone los items en COLUMNA vertical (de arriba abajo).
+Es como una torre de bloques. El eje principal ahora es vertical. */
+.contenedor--columna {
+    flex-direction: column;
+}
+
+
+/* ==================== JUSTIFY-CONTENT ==================== */
+/* justify-content controla cómo se distribuyen los items en el EJE PRINCIPAL. 
+Si flex-direction es row, el eje principal es HORIZONTAL (izquierda → derecha). */
+
+/* flex-start: todos pegados al INICIO del eje (izquierda en row) */
+.contenedor--inicio {
+    justify-content: flex-start;
+}
+
+/* center: todos CENTRADOS en el eje principal */
+.contenedor--centro {
+    justify-content: center;
+}
+
+/* flex-end: todos pegados al FINAL del eje (derecha en row) */
+.contenedor--final {
+    justify-content: flex-end;
+}
+
+/* space-between reparte el espacio SOLO ENTRE los items. 
+El primero se pega al inicio, el último al final, y el espacio entre ellos 
+es igual. Es como estirar un acordeón. */
+.contenedor--entre {
+    justify-content: space-between;
+}
+
+/* space-around: cada item tiene espacio IGUAL a ambos lados. 
+El espacio en los bordes es la MITAD que entre items. */
+.contenedor--alrededor {
+    justify-content: space-around;
+}
+
+/* space-evenly es el más "justo": todo el espacio es EXACTAMENTE igual, 
+incluyendo los bordes. Es como colocar personas equidistantes en una fila. */
+.contenedor--uniforme {
+    justify-content: space-evenly;
+}
+
+
+/* ==================== ALIGN-ITEMS ==================== */
+/* align-items controla la alineación en el EJE CRUZADO (perpendicular). 
+Si flex-direction es row, el eje cruzado es VERTICAL (arriba → abajo). 
+Contenedor--altura le da más altura para ver el efecto. */
+.contenedor--altura {
+    min-height: 200px;
+}
+
+/* flex-start: items alineados ARRIBA (inicio del eje cruzado) */
+.contenedor--arriba {
+    align-items: flex-start;
+}
+
+/* center: items CENTRADOS verticalmente */
+.contenedor--centrado-v {
+    align-items: center;
+}
+
+/* stretch es el valor POR DEFECTO. Los items se ESTIRAN para 
+ocupar toda la altura del contenedor. Pero solo funciona si los 
+items NO tienen un height definido. Como nuestras cajas con 
+modificadores tienen height fijo, solo la caja sin modificador se estira. */
+.contenedor--estirados {
+    align-items: stretch;
+}
+
+/* Para que stretch se vea bien, anulamos el height de las cajas 
+modificadas DENTRO de este contenedor */
+.contenedor--estirados .caja {
+    height: auto;
+}
+
+
+/* ==================== GAP ==================== */
+/* gap crea espacio ENTRE los items flex. 
+Es mucho más limpio que usar margin en los items porque: 
+1) No añade espacio extra en los bordes, 
+2) No necesitas calcular márgenes negativos, 
+3) Es una sola línea de código. */
+.contenedor--gap {
+    gap: 1rem;
+}
+
+
+/* ==================== FLEX-WRAP ==================== */
+/* flex-wrap: wrap permite que los items "salten" a una nueva 
+línea cuando no caben en la actual. Sin wrap, los items se 
+aplastarían para caber en una sola línea. Con wrap, se crea un 
+layout responsivo naturalmente. */
+.contenedor--wrap {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.contenedor--wrap .caja {
+    /* flex: 1 1 100px es una abreviatura de 3 propiedades:
+       flex-grow: 1 → puede crecer si hay espacio sobrante
+       flex-shrink: 1 → puede encogerse si falta espacio
+       flex-basis: 100px → tamaño inicial de referencia
+       
+       Esto hace que las cajas sean "elásticas": intentan medir 100px,
+       pero crecen o se encogen según el espacio disponible.
+    */
+    flex: 0 0 100px;
+    width: auto;
+}
